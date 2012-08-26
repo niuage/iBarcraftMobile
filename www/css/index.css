@@ -1,0 +1,34 @@
+html,
+body {
+  height:100%;
+  font-size:12px;
+  width:100%;
+}
+
+html {
+  display:table;
+}
+
+.ui-bar-a {
+  background: #544C68;
+  border-bottom: 1px solid #393048;
+  -webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 2px 2px -2px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.6);
+}
+
+.ui-btn-up-z, .ui-btn-hover-z {
+  background: #746B8C;
+  color: white;
+  text-decoration: none;
+}
+
+.ui-btn-up-z:visited, .ui-btn-up-z a.ui-link-inherit {
+  color: white;
+}
+
+.ui-btn-up-b {
+  background: #2AA390;
+  color: white;
+  border-color: #258479;
+}
