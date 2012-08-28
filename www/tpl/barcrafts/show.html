@@ -1,0 +1,27 @@
+<div data-role="header">
+    <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+    <h1>iBarcraft</h1>
+    <a href="#" data-icon="search" class="search ui-btn-right">Search</a>
+</div>
+
+<div data-role="content">
+    <img src="<%= barcraft.photo.photo.profile.url %>" class="employee-pic"/>
+    <div class="employee-details">
+        <h3><%= barcraft.title %></h3>
+
+        <p class="description">
+          <%= barcraft.description %>
+        </p>
+    </div>
+</div>
+
+<div data-role="footer" data-position="fixed">
+  <div data-role="navbar" class="nav-glyphish">
+    <ul>
+      <li><a href="#" id="rsvp-ico" data-icon="plus">RSVP</a></li>
+      <li><a href="#" id="checkin-ico" data-icon="check">Check in</a></li>
+      <li><a href="#" id="comment-ico" data-icon="plus">Comment</a></li>
+      <li><a href="#" id="upload-ico" data-icon="star">Upload</a></li>
+    </ul>
+  </div>
+</div>

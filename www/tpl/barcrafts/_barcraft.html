@@ -1,0 +1,9 @@
+<a href='#barcrafts/<%= barcraft.id %>'>
+    <img src="<%= barcraft.photo.photo.profile.url %>"/>
+  <h4><%= barcraft.title %></h4>
+  <p><%= barcraft.bar.name %></p>
+  <% if (barcraft.group) { %>
+    <p>By <%= barcraft.group.name %></p>
+  <% } %>
+  <span class="ui-li-count"><%= barcraft.attendees_count %></span>
+</a>
