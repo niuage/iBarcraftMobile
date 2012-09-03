@@ -11,19 +11,14 @@ window.BarcraftCollection = Backbone.Collection.extend({
 
   model: Barcraft,
 
-  url: "/barcrafts",
+  url: "http://api.ibarcraft.com/v1/barcrafts",
 
   findByLocation: function (location) {
-    var url = "http://api.ibarcraft.com/v1/barcrafts?where=" + location
-    console.log('findByLocation: ' + location);
-    var self = this;
-    $.ajax({
-      url: url,
-      dataType: "json",
-      success: function (data) {
-        self.reset(data);
+    this.fetch({
+      data: {
+        where: location
       }
-    });
+    })
   }
 
 });

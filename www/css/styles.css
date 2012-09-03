@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
   height:100%;
@@ -9,26 +14,65 @@ html {
   display:table;
 }
 
-.ui-bar-a {
-  background: #544C68;
-  border-bottom: 1px solid #393048;
-  -webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: 0 2px 2px -2px rgba(0,0,0,0.6);
-  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.6);
+/* Non-semantic classes */
+
+.faded {
+  color: #777;
 }
 
-.ui-btn-up-z, .ui-btn-hover-z {
-  background: #746B8C;
-  color: white;
-  text-decoration: none;
+.subtitle {
+  padding: 3px 0 6px;
 }
 
-.ui-btn-up-z:visited, .ui-btn-up-z a.ui-link-inherit {
-  color: white;
+.section {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 
-.ui-btn-up-b {
-  background: #2AA390;
-  color: white;
-  border-color: #258479;
+/* end */
+
+.profile-header {
+  position: relative;
+}
+
+.profile-header .profile-pic {
+  position: absolute;
+  top: 0; left: 0;
+  height: 75px;
+  width: 75px;
+}
+
+.profile-content {
+  padding-left: 85px;
+}
+.profile-content h3 {
+  font-size: 16px;
+}
+
+table {
+  border-width: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table .label {
+  width: 75px;
+  padding-right: 8px;
+  text-align: right;
+  color: #777;
+  font-weight: bold;
+}
+
+table tr:first-child td {
+  padding-top: 0;
+}
+table tr.no-borders td,
+table tr:last-child td { border: 0; padding-bottom: 0; }
+table td {
+  vertical-align: top;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  border-bottom: 1px solid #eee;
 }

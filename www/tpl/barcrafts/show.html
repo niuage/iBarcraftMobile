@@ -1,27 +1,67 @@
 <div data-role="header">
-    <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
-    <h1>iBarcraft</h1>
-    <a href="#" data-icon="search" class="search ui-btn-right">Search</a>
+  <a href="#" data-icon="back" class="back ui-btn-left" data-iconpos="notext">Back</a>
+  <h1>iBarcraft</h1>
+  <a href="#" data-icon="search" class="search ui-btn-right" data-iconpos="notext">Search</a>
 </div>
 
 <div data-role="content">
-    <img src="<%= barcraft.photo.photo.profile.url %>" class="employee-pic"/>
-    <div class="employee-details">
-        <h3><%= barcraft.title %></h3>
 
-        <p class="description">
-          <%= barcraft.description %>
-        </p>
+  <div class="section profile-header">
+    <img src="<%= barcraft.photo.photo.thumb.url %>" class="profile-pic"/>
+    <div class="profile-content">
+      <h3><%= barcraft.title %></h3>
+      <% if (barcraft.group) { %>
+      <p class="faded subtitle">Organized by <%= barcraft.group.name %></p>
+      <% } %>
+
+      <div class="actions">
+        <a href="index.html" data-role="button" data-mini="true" data-inline="true" data-shadow="false" data-icon="check" data-theme="b" data-role="checkin">Check in!</a>
+        <a href="index.html" data-role="button" data-mini="true" data-shadow="false" data-inline="true" data-role="rsvp">RSVP</a>
+      </div>
     </div>
+
+  </div>
+
+  <div class="section">
+
+    <table>
+      <tr>
+        <td class="label">When</td>
+        <td><%= barcraft.timeframe.from %></td>
+      </tr>
+      <tr class="no-borders">
+        <td class="label">Where</td>
+        <td>
+          <%= barcraft.bar.name %><br />
+          <%= barcraft.location.address %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= barcraft.location.latitude %>,<%= barcraft.location.longitude %>&amp;markers=color:red|label:B|<%= barcraft.location.latitude %>,<%= barcraft.location.longitude %>&amp;zoom=13&amp;size=304x100&amp;sensor=false">
+        </td>
+      </tr>
+      <tr>
+        <td class="label">Details</td>
+        <td>
+          <div class="collapsable">
+            <%= barcraft.description %>
+            <a href="#" class="toggle">Read more</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
 </div>
 
+<!--
 <div data-role="footer" data-position="fixed">
   <div data-role="navbar" class="nav-glyphish">
     <ul>
       <li><a href="#" id="rsvp-ico" data-icon="plus">RSVP</a></li>
       <li><a href="#" id="checkin-ico" data-icon="check">Check in</a></li>
-      <li><a href="#" id="comment-ico" data-icon="plus">Comment</a></li>
-      <li><a href="#" id="upload-ico" data-icon="star">Upload</a></li>
     </ul>
   </div>
 </div>
+-->
