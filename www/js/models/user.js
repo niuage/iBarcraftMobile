@@ -8,5 +8,15 @@ window.User = Backbone.Model.extend({
 
 window.UserCollection = Backbone.Collection.extend({
   model: User,
-  url: "/users"
+  url: "http://api.ibarcraft.com/v1/users"
+})
+
+window.BarcraftUserCollection = Backbone.Collection.extend({
+  initialize: function (models, options) {
+    this.barcraft_id = options.barcraft_id
+  },
+  model: User,
+  url: function () {
+    return "http://api.ibarcraft.com/v1/barcrafts/" + this.barcraft_id + "/users"
+  }
 })

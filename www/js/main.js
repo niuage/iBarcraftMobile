@@ -45,7 +45,7 @@ var AppRouter = Backbone.Router.extend({
 });
 
 var deviceready = function() {
-  tpl.loadTemplates(['barcrafts/index', 'barcrafts/show', 'barcrafts/_barcraft'],
+  tpl.loadTemplates(['barcrafts/index', 'barcrafts/show', 'barcrafts/_barcraft', 'users/_user'],
     function () {
       app = new AppRouter();
       Backbone.history.start();

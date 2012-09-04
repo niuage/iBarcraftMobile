@@ -7,7 +7,6 @@ window.BarcraftListPage = Backbone.View.extend({
   render: function (eventName) {
     $(this.el).html(this.template(this.model.toJSON()));
     this.listView = new BarcraftListView({ el: $('ul', this.el), model: this.model });
-    // this.listView.render();
     this.geolocate();
     return this;
   },
@@ -53,7 +52,7 @@ window.BarcraftListView = Backbone.View.extend({
     _.each(this.model.models, function (barcraft) {
       $(this.el).append(new BarcraftListItemView({model: barcraft}).render().el);
     }, this);
-    $('#myList').listview('refresh');
+    $('#myList').listview('refresh'); // try this.$el.lis...
     return this;
   }
 });

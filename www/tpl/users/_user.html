@@ -1,0 +1,7 @@
+<a href='#'>
+  <img src="<%= user.avatar.avatar.small.url %>"/>
+  <h4><%= user.login %></h4>
+  <% if (user.location) { %>
+    <p><%= user.location.address %></p>
+  <% } %>
+</a>

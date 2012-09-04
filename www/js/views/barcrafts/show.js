@@ -6,11 +6,18 @@ window.BarcraftView = Backbone.View.extend({
 
   events: {
     "click [data-role=rsvp]": "rsvp",
-    "click [data-role=checkin]": "checkin"
+    "click #checkin": "checkin"
   },
 
   render: function (eventName) {
     $(this.el).html(this.template(this.model.toJSON()));
+    this.userListView = new UserListView({
+      el: $("ul", this.el),
+      model: new BarcraftUserCollection([], {
+        barcraft_id: this.model.get("barcraft").id
+      })
+    });
+    this.userListView.render();
     return this;
   },
 

@@ -34,6 +34,7 @@ html {
 
 .profile-header {
   position: relative;
+  min-height: 75px;
 }
 
 .profile-header .profile-pic {
