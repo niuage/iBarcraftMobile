@@ -13,7 +13,6 @@ tpl = {
         var loadTemplate = function (index) {
             var name = names[index];
             $.get('tpl/' + name + '.html', function (data) {
-                console.log(data)
                 that.templates[name] = data;
                 index++;
                 if (index < names.length) {

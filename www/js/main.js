@@ -34,6 +34,7 @@ var AppRouter = Backbone.Router.extend({
     $(page.el).attr('data-role', 'page');
     page.render();
     $('body').append($(page.el));
+
     var transition = $.mobile.defaultPageTransition;
     if (this.firstPage) {
       transition = 'none';
@@ -45,7 +46,7 @@ var AppRouter = Backbone.Router.extend({
 });
 
 var deviceready = function() {
-  tpl.loadTemplates(['barcrafts/index', 'barcrafts/show', 'barcrafts/_barcraft', 'users/_user'],
+  tpl.loadTemplates(['barcrafts/index', 'barcrafts/show', 'barcrafts/_barcraft', 'users/_user', 'checkins/_checkin'],
     function () {
       app = new AppRouter();
       Backbone.history.start();
@@ -54,6 +55,8 @@ var deviceready = function() {
   if(window.plugins.childBrowser == null) {
     ChildBrowser.install();
   }
+
+
 
   var debug = true;
 

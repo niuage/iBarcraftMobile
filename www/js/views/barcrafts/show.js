@@ -11,52 +11,62 @@ window.BarcraftView = Backbone.View.extend({
 
   render: function (eventName) {
     $(this.el).html(this.template(this.model.toJSON()));
-    this.userListView = new UserListView({
-      el: $("ul", this.el),
+
+    this.userListView = this.createUserList();
+    this.userListView.render();
+
+    this.checkinListView = this.createCheckinList();
+    this.checkinListView.render();
+
+    return this;
+  },
+
+  createUserList: function () {
+    return new UserListView({
+      el: $("ul#user-list", this.el),
       model: new BarcraftUserCollection([], {
         barcraft_id: this.model.get("barcraft").id
       })
     });
-    this.userListView.render();
-    return this;
+  },
+
+  createCheckinList: function () {
+    return new CheckinListView({
+      el: $("ul#checkin-list", this.el),
+      model: new BarcraftCheckinCollection([], {
+        barcraft_id: this.model.get("barcraft").id
+      })
+    });
   },
 
   rsvp: function(e) {
-    jso_ensureTokens({
-      "ibarcraft": ["public", "write"]
-    });
-
     barcraft_id = this.model.id
 
     e.preventDefault();
     $.oajax({
+      jso_allowia: true,
       url: "http://api.ibarcraft.com/v1/barcrafts/" + barcraft_id + "/rsvps",
       jso_provider: "ibarcraft",
       jso_scopes: ["write"],
       type: "POST",
       dataType: 'json',
       success: function(data) {
-        console.log("Response (bridge):");
         console.log(data);
       },
       error: function() {
-        console.log("ERROR Custom callback()");
+        console.log("ERROR rsvp");
       },
       complete: function() {
-        console.log("ayaaaa");
       }
     });
   },
 
   checkin: function(e) {
-    jso_ensureTokens({
-      "ibarcraft": ["public", "write"]
-    });
-
     barcraft_id = this.model.id
 
     e.preventDefault();
     $.oajax({
+      jso_allowia: true,
       url: "http://api.ibarcraft.com/v1/barcrafts/" + barcraft_id + "/checkins",
       jso_provider: "ibarcraft",
       jso_scopes: ["write"],
@@ -69,11 +79,10 @@ window.BarcraftView = Backbone.View.extend({
       },
       dataType: 'json',
       success: function(data) {
-        console.log("Response (bridge):");
         console.log(data);
       },
       error: function() {
-        console.log("ERROR Custom callback()");
+        console.log("ERROR checking in");
       },
       complete: function() {
         console.log("ayaaaa");

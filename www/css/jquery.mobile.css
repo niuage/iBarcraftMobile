@@ -75,3 +75,9 @@
 .ui-btn-hover-a, .ui-btn-down-a {
   background: #9087A8;
 }
+
+.ui-bar-b {
+  background: #544C68;
+  border: 0;
+  border: 1px solid #393048;
+}

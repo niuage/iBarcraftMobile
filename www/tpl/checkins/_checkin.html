@@ -1,0 +1,8 @@
+<a href='#'>
+  <img src="<%= checkin.user.avatar.avatar.small.url %>"/>
+  <h4><%= checkin.user.login %></h4>
+  <% if (checkin.location) { %>
+    <p><%= checkin.location.address %></p>
+  <% } %>
+</a>
+

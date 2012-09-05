@@ -10,6 +10,9 @@ window.UserListView = Backbone.View.extend({
       var el = new UserListItemView({model: user}).render().el
       $(this.el).append(el);
     }, this);
-    $('#user-list').listview('refresh');
+    var title = $("<li></li>").attr("data-role", "list-divider").html("Attendees")
+    $(this.el).prepend(title);
+    $("#user-list").listview('refresh');
+    return this;
   }
 })

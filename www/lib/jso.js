@@ -1,6 +1,6 @@
 (function(exp, $) {
 
-	var 
+	var
 		config = {},
 		default_lifetime = 3600,
 		options = {
@@ -38,11 +38,11 @@
 
 		// console.log("LOG(), Arguments", arguments, msg)
 		if (arguments.length > 1) {
-			console.log(arguments);	
+			console.log(arguments);
 		} else {
 			console.log(msg);
 		}
-		
+
 	}
 
 	/**
@@ -59,7 +59,7 @@
 	}
 
 
-	/* 
+	/*
 	 * Takes an URL as input and a params object.
 	 * Each property in the params is added to the url as query string parameters
 	 */
@@ -75,7 +75,7 @@
 
 
 
-	/* 
+	/*
 	 * Redirects the user to a specific URL
 	 */
 	api_redirect = function(url) {
@@ -130,7 +130,7 @@
 	 * are expired, and the ones that do not meet a scopes requirement.
 	 */
 	Api_default_storage.prototype.filterTokens = function(tokens, scopes) {
-		var i, j, 
+		var i, j,
 			result = [],
 			now = epoch(),
 			usethis;
@@ -218,7 +218,7 @@
 		});
 	}
 
-	/* 
+	/*
 	 * Takes an URL as input and a params object.
 	 * Each property in the params is added to the url as query string parameters
 	 */
@@ -264,7 +264,7 @@
 
 
 	/**
-	 * Check if the hash contains an access token. 
+	 * Check if the hash contains an access token.
 	 * And if it do, extract the state, compare with
 	 * config, and store the access token for later use.
 	 *
@@ -273,7 +273,7 @@
 	 * instead the response is received on a child browser.
 	 */
 	exp.jso_checkfortoken = function(providerID, url, callback) {
-		var 
+		var
 			atoken,
 			h = window.location.hash,
 			now = epoch(),
@@ -282,7 +282,7 @@
 
 		log("jso_checkfortoken(" + providerID + ")");
 
-		// If a url is provided 
+		// If a url is provided
 		if (url) {
 			// log('Hah, I got the url and it ' + url);
 			if(url.indexOf('#') === -1) return;
@@ -305,7 +305,7 @@
 			state = {providerID: providerID};
 		}
 
-		
+
 		if (!state) throw "Could not retrieve state";
 		if (!state.providerID) throw "Could not get providerid from state";
 		if (!config[state.providerID]) throw "Could not retrieve config for this provider.";
@@ -385,7 +385,7 @@
 	 */
 	var jso_authrequest = function(providerid, scopes, callback) {
 
-		var 
+		var
 			state,
 			request,
 			authurl,
@@ -420,7 +420,7 @@
 
 		authurl = encodeURL(co.authorization, request);
 
-		// We'd like to cache the hash for not loosing Application state. 
+		// We'd like to cache the hash for not loosing Application state.
 		// With the implciit grant flow, the hash will be replaced with the access
 		// token when we return after authorization.
 		if (window.location.hash) {
@@ -460,7 +460,7 @@
 	}
 
 	exp.jso_findDefaultEntry = function(c) {
-		var 
+		var
 			k,
 			i = 0;
 
@@ -482,13 +482,13 @@
 
 			var def = jso_findDefaultEntry(c);
 			log("jso_configure() about to check for token for this entry", def);
-			exp.jso_checkfortoken(def);	
+			exp.jso_checkfortoken(def);
 
 		} catch(e) {
 			log("Error when retrieving token from hash: " + e);
 			window.location.hash = "";
 		}
-		
+
 	}
 
 	exp.jso_dump = function() {
@@ -538,13 +538,13 @@
 	if (typeof $ === 'undefined') return;
 
 	$.oajax = function(settings) {
-		var 
+		var
 			allowia,
 			scopes,
 			token,
 			providerid,
 			co;
-		
+
 		providerid = settings.jso_provider;
 		allowia = settings.jso_allowia || false;
 		scopes = settings.jso_scopes;
@@ -560,7 +560,7 @@
 		var performAjax = function() {
 			// log("Perform ajax!");
 
-			if (!token) throw "Could not perform AJAX call because no valid tokens was found.";	
+			if (!token) throw "Could not perform AJAX call because no valid tokens was found.";
 
 			if (co["presenttoken"] && co["presenttoken"] === "qs") {
 				// settings.url += ((h.indexOf("?") === -1) ? '?' : '&') + "access_token=" + encodeURIComponent(token["access_token"]);
@@ -592,7 +592,9 @@
 		}
 
 
+		log("WTFFFFFF");
 		if (!token) {
+			log("WTFFFFFF2");
 			if (allowia) {
 				log("Perform authrequest");
 				jso_authrequest(providerid, scopes, function() {
@@ -601,7 +603,7 @@
 				});
 				return;
 			} else {
-				throw "Could not perform AJAX call because no valid tokens was found.";	
+				throw "Could not perform AJAX call because no valid tokens was found.";
 			}
 		}
 

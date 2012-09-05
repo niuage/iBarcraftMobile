@@ -29,6 +29,7 @@ html {
   padding-bottom: 8px;
   margin-bottom: 8px;
 }
+.section.no-borders { border: 0; }
 
 /* end */
 
@@ -77,3 +78,28 @@ table td {
   padding-top: 8px;
   border-bottom: 1px solid #eee;
 }
+
+/* THIN LIST */
+
+.thin-list .ui-li-has-thumb a.ui-link-inherit {
+  padding: 8px 40px 8px 82px;
+  min-height: 40px;
+}
+
+
+/* END */
+
+
+.dark-box {
+  margin: -8px;
+  padding: 16px;
+  background: #b9c4db;
+}
+
+.dark-box .thin-list {
+  margin-bottom: 16px;
+  -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3);
+}
+.dark-box .thin-list:last-child { margin-bottom: 0px; }

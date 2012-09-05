@@ -22,25 +22,36 @@
 
   </div>
 
-  <div class="section">
+  <div class="section no-borders">
 
     <table>
       <tr>
         <td class="label">When</td>
-        <td><%= barcraft.timeframe.from %></td>
+        <td>
+          <%= barcraft.timeframe.from %><br />
+          <% if (barcraft.timeframe.from) { %>
+            to <%= barcraft.timeframe.to %>
+          <% } %>
+        </td>
       </tr>
       <tr class="no-borders">
         <td class="label">Where</td>
         <td>
-          <%= barcraft.bar.name %><br />
+          <strong><%= barcraft.bar.name %></strong><br />
           <%= barcraft.location.address %>
         </td>
       </tr>
       <tr>
         <td colspan="2">
-          <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= barcraft.location.latitude %>,<%= barcraft.location.longitude %>&amp;markers=color:red|label:B|<%= barcraft.location.latitude %>,<%= barcraft.location.longitude %>&amp;zoom=13&amp;size=304x100&amp;sensor=false">
+          <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= barcraft.location.latitude %>,<%= barcraft.location.longitude %>&amp;markers=color:red|label:B|<%= barcraft.location.latitude %>,<%= barcraft.location.longitude %>&amp;zoom=11&amp;size=304x100&amp;sensor=false">
         </td>
       </tr>
+      <% if (barcraft.event) { %>
+      <tr>
+        <td class="label">Event</td>
+        <td><%= barcraft.event.name %></td>
+      </tr>
+      <% } %>
       <tr>
         <td class="label">Details</td>
         <td>
@@ -54,8 +65,13 @@
 
   </div>
 
-  <div class="section">
-    <ul data-role="listview" id='user-list'></ul>
+  <div class="dark-box">
+    <ul data-role="listview" id='user-list' class="thin-list">
+
+    </ul>
+    <ul data-role="listview" id='checkin-list' class="thin-list">
+
+    </ul>
   </div>
 </div>
 
