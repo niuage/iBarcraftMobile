@@ -35,9 +35,10 @@ var AppRouter = Backbone.Router.extend({
     page.render();
     $('body').append($(page.el));
 
+    $.mobile.defaultPageTransition = "slide";
     var transition = $.mobile.defaultPageTransition;
     if (this.firstPage) {
-      transition = 'none';
+      // transition = 'none';
       this.firstPage = false;
     }
     $.mobile.changePage($(page.el), { changeHash:false, transition: transition });
@@ -50,6 +51,9 @@ var deviceready = function() {
     function () {
       app = new AppRouter();
       Backbone.history.start();
+      $(document).on("pageinit", "[data-role=page]", function() {
+        $(this).find("[data-role=content]").trigger("iInit");
+      })
     });
 
   if(window.plugins.childBrowser == null) {

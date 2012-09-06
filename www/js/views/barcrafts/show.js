@@ -5,8 +5,16 @@ window.BarcraftView = Backbone.View.extend({
   },
 
   events: {
-    "click [data-role=rsvp]": "rsvp",
-    "click #checkin": "checkin"
+    "click #rsvp": "rsvp",
+    "click #checkin": "checkin",
+    "iInit [data-role=content]": "pageInit"
+  },
+
+  pageInit: function(e) {
+    e.stopPropagation();
+    // token = jso_getToken("ibarcraft", "public")
+    // if (token)
+
   },
 
   render: function (eventName) {
