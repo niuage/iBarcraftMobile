@@ -38,7 +38,7 @@ var AppRouter = Backbone.Router.extend({
     $.mobile.defaultPageTransition = "slide";
     var transition = $.mobile.defaultPageTransition;
     if (this.firstPage) {
-      // transition = 'none';
+      transition = 'pop';
       this.firstPage = false;
     }
     $.mobile.changePage($(page.el), { changeHash:false, transition: transition });
@@ -68,30 +68,22 @@ var deviceready = function() {
 
   window.plugins.childBrowser.onLocationChange = function(url){
     url = decodeURIComponent(url);
-    console.log("Checking location: " + url);
     jso_checkfortoken('ibarcraft', url, function() {
-      console.log("Closing child browser, because a valid response was detected.");
       window.plugins.childBrowser.close();
     });
   };
 
   jso_configure({
     "ibarcraft": {
-      client_id: "253adc42d7e296b1a0c353912296bc71ae5498eed998d7ec81678ce142531bff",
-      redirect_uri: "http://ibarcraft.com/oauth.html", // "http://ibarcraft.com/oauth.html"
-      authorization: "http://ibarcraft.com/oauth/authorize",
+      client_id: client_id,
+      redirect_uri: ibarcraft_url("oauth.html"), // "http://ibarcraft.com/oauth.html"
+      authorization: ibarcraft_url("oauth/authorize"),
       scope: ["public", "write"]
     }
   }, {"debug": debug});
-
   jso_wipe();
-
-  // jso_ensureTokens({
-  //   "ibarcraft": ["public", "write"]
-  // });
-
   jso_dump();
 }
 
-$(document).bind('deviceready', this.deviceready)
-$(document).trigger('deviceready')
+$(document).bind('deviceready', this.deviceready);
+$(document).trigger('deviceready');

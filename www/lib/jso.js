@@ -592,11 +592,8 @@
 		}
 
 
-		log("WTFFFFFF");
 		if (!token) {
-			log("WTFFFFFF2");
 			if (allowia) {
-				log("Perform authrequest");
 				jso_authrequest(providerid, scopes, function() {
 					token = api_storage.getToken(providerid, scopes);
 					performAjax();

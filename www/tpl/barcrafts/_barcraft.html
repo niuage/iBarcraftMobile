@@ -1,9 +1,10 @@
 <a href='#barcrafts/<%= barcraft.id %>'>
     <img src="<%= barcraft.photo.photo.thumb.url %>"/>
   <h4><%= barcraft.title %></h4>
-  <p><%= barcraft.bar.name %></p>
   <% if (barcraft.group) { %>
     <p>By <%= barcraft.group.name %></p>
   <% } %>
+  <p>Where: <%= barcraft.bar.name %> | When: <%= barcraft.timeframe.from %></p>
+
   <span class="ui-li-count"><%= barcraft.attendees_count %></span>
 </a>

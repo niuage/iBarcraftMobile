@@ -1,5 +1,5 @@
 window.Checkin = Backbone.Model.extend({
-  urlRoot: "http://api.ibarcraft.com/v1/checkins",
+  urlRoot: api_url("v1/checkins"),
 
   initialize: function () {
   }
@@ -7,7 +7,7 @@ window.Checkin = Backbone.Model.extend({
 
 window.CheckinCollection = Backbone.Collection.extend({
   model: Checkin,
-  url: "http://api.ibarcraft.com/v1/checkins"
+  url: api_url("v1/checkins")
 })
 
 window.BarcraftCheckinCollection = CheckinCollection.extend({
@@ -15,6 +15,6 @@ window.BarcraftCheckinCollection = CheckinCollection.extend({
     this.barcraft_id = options.barcraft_id
   },
   url: function () {
-    return "http://api.ibarcraft.com/v1/barcrafts/" + this.barcraft_id + "/checkins"
+    return api_url("v1/barcrafts/" + this.barcraft_id + "/checkins");
   }
 })

@@ -12,8 +12,40 @@ window.BarcraftView = Backbone.View.extend({
 
   pageInit: function(e) {
     e.stopPropagation();
-    // token = jso_getToken("ibarcraft", "public")
-    // if (token)
+    token = jso_getToken("ibarcraft", "public")
+    console.log("------------")
+    // console.log(token);
+    // if (token) {
+      this.isAttending()
+      // this.isCheckedin()
+    // }
+  },
+
+  isAttending: function () {
+    console.log("isAttending")
+    self = this;
+    barcraft_id = self.model.id
+    $.oajax({
+      jso_allowia: true,
+      url: api_url("v1/barcrafts/" + barcraft_id + "/rsvps/attending"),
+      jso_provider: "ibarcraft",
+      // jso_scopes: ["public"],
+      type: "GET",
+      dataType: 'json',
+      success: function(data) {
+        // console.log("////////////////")
+        console.log(data);
+        if (data.rsvp) {
+          $("#rsvp .ui-btn-text").html("Attending")
+        }
+      },
+      error: function() {
+        console.log("ERROR is attending");
+      }
+    });
+  },
+
+  isCheckedin: function () {
 
   },
 
@@ -48,34 +80,34 @@ window.BarcraftView = Backbone.View.extend({
   },
 
   rsvp: function(e) {
-    barcraft_id = this.model.id
+    self = this;
+    barcraft_id = self.model.id
 
     e.preventDefault();
     $.oajax({
       jso_allowia: true,
-      url: "http://api.ibarcraft.com/v1/barcrafts/" + barcraft_id + "/rsvps",
+      url: api_url("v1/barcrafts/" + barcraft_id + "/rsvps"),
       jso_provider: "ibarcraft",
       jso_scopes: ["write"],
       type: "POST",
       dataType: 'json',
       success: function(data) {
-        console.log(data);
+        self.newAttendee(data.rsvp.user);
       },
       error: function() {
         console.log("ERROR rsvp");
-      },
-      complete: function() {
       }
     });
   },
 
   checkin: function(e) {
-    barcraft_id = this.model.id
+    self = this;
+    barcraft_id = self.model.id
 
     e.preventDefault();
     $.oajax({
       jso_allowia: true,
-      url: "http://api.ibarcraft.com/v1/barcrafts/" + barcraft_id + "/checkins",
+      url: api_url("v1/barcrafts/" + barcraft_id + "/checkins"),
       jso_provider: "ibarcraft",
       jso_scopes: ["write"],
       type: "POST",
@@ -86,16 +118,22 @@ window.BarcraftView = Backbone.View.extend({
         }
       },
       dataType: 'json',
-      success: function(data) {
-        console.log(data);
+      success: function(checkin) {
+        console.log(checkin);
+        self.newCheckin(checkin);
       },
       error: function() {
         console.log("ERROR checking in");
-      },
-      complete: function() {
-        console.log("ayaaaa");
       }
     });
+  },
+
+  newAttendee: function(user) {
+    this.userListView.model.add({ user: user });
+  },
+
+  newCheckin: function(checkin) {
+    this.checkinListView.model.add(checkin);
   }
 
 });

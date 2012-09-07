@@ -1,5 +1,5 @@
 window.User = Backbone.Model.extend({
-  urlRoot: "http://api.ibarcraft.com/v1/users",
+  urlRoot: api_url("v1/users"),
 
   initialize: function () {
 
@@ -8,7 +8,7 @@ window.User = Backbone.Model.extend({
 
 window.UserCollection = Backbone.Collection.extend({
   model: User,
-  url: "http://api.ibarcraft.com/v1/users"
+  url: api_url("v1/users")
 })
 
 window.BarcraftUserCollection = UserCollection.extend({
@@ -16,6 +16,6 @@ window.BarcraftUserCollection = UserCollection.extend({
     this.barcraft_id = options.barcraft_id
   },
   url: function () {
-    return "http://api.ibarcraft.com/v1/barcrafts/" + this.barcraft_id + "/users"
+    return api_url("v1/barcrafts/" + this.barcraft_id + "/users");
   }
 })
