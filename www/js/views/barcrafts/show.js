@@ -11,14 +11,14 @@ window.BarcraftView = Backbone.View.extend({
   },
 
   pageInit: function(e) {
+    console.log("PAGE INIT");
     e.stopPropagation();
-    token = jso_getToken("ibarcraft", "public")
-    console.log("------------")
-    // console.log(token);
-    // if (token) {
+    token = jso_getToken("ibarcraft")
+    console.log("TOOOOOOKKKKEN WHERE ARE YOU??")
+    if (token) {
       this.isAttending()
-      // this.isCheckedin()
-    // }
+      this.isCheckedin()
+    }
   },
 
   isAttending: function () {
@@ -29,12 +29,9 @@ window.BarcraftView = Backbone.View.extend({
       jso_allowia: true,
       url: api_url("v1/barcrafts/" + barcraft_id + "/rsvps/attending"),
       jso_provider: "ibarcraft",
-      // jso_scopes: ["public"],
       type: "GET",
       dataType: 'json',
       success: function(data) {
-        // console.log("////////////////")
-        console.log(data);
         if (data.rsvp) {
           $("#rsvp .ui-btn-text").html("Attending")
         }
@@ -46,7 +43,23 @@ window.BarcraftView = Backbone.View.extend({
   },
 
   isCheckedin: function () {
-
+    console.log("isCheckedin")
+    self = this;
+    barcraft_id = self.model.id
+    $.oajax({
+      jso_allowia: true,
+      url: api_url("v1/barcrafts/" + barcraft_id + "/checkins/checked_in"),
+      jso_provider: "ibarcraft",
+      type: "GET",
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        if (data.checkin) {
+          $("#checkin .ui-btn-text").html("Checked in!")
+        }
+      },
+      error: function() { console.log("ERROR is checked in"); }
+    });
   },
 
   render: function (eventName) {
@@ -102,38 +115,46 @@ window.BarcraftView = Backbone.View.extend({
 
   checkin: function(e) {
     self = this;
-    barcraft_id = self.model.id
-
     e.preventDefault();
-    $.oajax({
-      jso_allowia: true,
-      url: api_url("v1/barcrafts/" + barcraft_id + "/checkins"),
-      jso_provider: "ibarcraft",
-      jso_scopes: ["write"],
-      type: "POST",
-      data: {
-        checkin: {
-          message: "Yeah!",
-          location: "40.862641,-74.465538"
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log([position.coords.latitude, position.coords.longitude].join(","))
+
+      barcraft_id = self.model.id
+
+      $.oajax({
+        jso_allowia: true,
+        url: api_url("v1/barcrafts/" + barcraft_id + "/checkins"),
+        jso_provider: "ibarcraft",
+        jso_scopes: ["write"],
+        type: "POST",
+        data: {
+          checkin: {
+            message: "",
+            location: [position.coords.latitude, position.coords.longitude].join(",")
+          }
+        },
+        dataType: 'json',
+        success: function(checkin) {
+          console.log(checkin);
+          self.newCheckin(checkin);
+        },
+        error: function() {
+          console.log("ERROR checking in");
         }
-      },
-      dataType: 'json',
-      success: function(checkin) {
-        console.log(checkin);
-        self.newCheckin(checkin);
-      },
-      error: function() {
-        console.log("ERROR checking in");
-      }
-    });
+      });
+    }, function(error) {
+      console.log("We have to get your location to")
+    })
   },
 
   newAttendee: function(user) {
     this.userListView.model.add({ user: user });
+    $("#rsvp .ui-btn-text").html("Attending")
   },
 
   newCheckin: function(checkin) {
     this.checkinListView.model.add(checkin);
+    $("#checkin .ui-btn-text").html("Checked in!")
   }
 
 });
